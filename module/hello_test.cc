@@ -4,7 +4,7 @@
 namespace {
 int DoMain() {
     HelloClass hello;
-    std::cout << hello.SayHello("Bob") << std::endl;
+    std::cout << "Is 64 bit compiled?: " << (hello.is64BitCompiled()? "yes":"no") << std::endl;
     return 0;
 }
 
