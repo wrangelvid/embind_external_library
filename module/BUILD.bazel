@@ -13,9 +13,6 @@ EMCC_SETTINGS = [
     "-s SINGLE_FILE=1",
 ]
 
-# NO EXTERNAL DEPENDENCIES:
-# Build a simple C++ library, test it and bind it with emscripten.
-
 cc_library(
     name = "hello",
     srcs = ["hello.cc"],
@@ -38,32 +35,4 @@ cc_binary(
 wasm_cc_binary(
     name = "hello_wasm",
     cc_target = ":hello_embind",
-)
-
-# WITH EXTERNAL DEPENDENCIES:
-# Same as above, but now with fmt as an external dependency.
-
-cc_library(
-    name = "hello_external",
-    srcs = ["hello_external.cc"],
-    hdrs = ["hello.h"],
-    deps = ["@fmt"],
-)
-
-cc_binary(
-    name = "hello_external_test",
-    srcs = ["hello_test.cc"],
-    deps = [":hello_external"],
-)
-
-cc_binary(
-    name = "hello_external_embind",
-    srcs = ["hello_js.cc"],
-    deps = [":hello_external"],
-    linkopts = EMCC_SETTINGS,
-    tags = ["manual"],
-)
-wasm_cc_binary(
-    name = "hello_external_wasm",
-    cc_target = ":hello_external_embind",
 )
