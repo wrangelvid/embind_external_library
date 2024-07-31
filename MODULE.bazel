@@ -1,0 +1,2 @@
+bazel_dep(name = "platforms", version = "0.0.9")
+bazel_dep(name = "fmt", version = "10.2.1")

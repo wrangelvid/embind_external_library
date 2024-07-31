@@ -1,0 +1,14 @@
+# Default to an optimized build.
+build --compilation_mode=opt
+
+# Default build options.
+build --strip=never
+
+# Enable Bzlmod for every Bazel command.
+common --enable_bzlmod
+
+# Necessary for emscripten.
+build --incompatible_enable_cc_toolchain_resolution
+
+# Default test options.
+build --test_output=streamed

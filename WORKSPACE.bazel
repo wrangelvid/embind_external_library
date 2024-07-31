@@ -1,0 +1,21 @@
+workspace(name = "embind_external_library")
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+# Install emscripten.
+EMSDK_VERSION = "3.1.64"
+EMSDK_SHA256 = "d4bdce9752e7e81b3e9ced64c020516065eb14a1d192df6360a02b329b033f36"
+http_archive(
+    name = "emsdk",
+    sha256 = EMSDK_SHA256,
+    strip_prefix = "emsdk-{}/bazel".format(EMSDK_VERSION),
+    url = "https://github.com/emscripten-core/emsdk/archive/refs/tags/{}.tar.gz".format(EMSDK_VERSION),
+)
+
+load("@emsdk//:deps.bzl", emsdk_deps = "deps")
+emsdk_deps()
+
+load("@emsdk//:emscripten_deps.bzl", emsdk_emscripten_deps = "emscripten_deps")
+emsdk_emscripten_deps(emscripten_version = EMSDK_VERSION)
+
+load("@emsdk//:toolchains.bzl", "register_emscripten_toolchains")
+register_emscripten_toolchains()

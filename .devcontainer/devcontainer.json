@@ -1,0 +1,14 @@
+{
+    "build": {
+		"dockerfile": "Dockerfile"
+	},
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "streetsidesoftware.code-spell-checker",
+                "BazelBuild.vscode-bazel",
+                "ms-vscode.cpptools-extension-pack"
+            ]
+        }
+    }
+}
