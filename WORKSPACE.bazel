@@ -18,4 +18,22 @@ load("@emsdk//:emscripten_deps.bzl", emsdk_emscripten_deps = "emscripten_deps")
 emsdk_emscripten_deps(emscripten_version = EMSDK_VERSION)
 
 load("@emsdk//:toolchains.bzl", "register_emscripten_toolchains")
-register_emscripten_toolchains()
+register_emscripten_toolchains(cache = {
+     "configuration": ["--wasm64"],
+     "targets": [
+         "libprintf_long_double",
+         "libembind-rtti",
+         "libGL-getprocaddr",
+         "libal",
+         "libhtml5",
+         "libstubs",
+         "libnoexit",
+         "libc",
+         "libemmalloc",
+         "libcompiler_rt",
+         "libc++-noexcept",
+         "libc++abi-noexcept",
+         "libsockets"
+     ]
+ })
+
