@@ -61,3 +61,9 @@ Now the BIGINT isn't required anymore and we can compile the code without errors
 - `chrome://flags/#enable-experimental-webassembly-features`
 
 At least it works! Let's see if we can get rid of the 64 bit memory and *only* use 64 bit values.
+
+### Update 2:
+
+Okay, I had to go through a little bit of learning here. It turns out that I may not need to use MEMORY64 at all. If I only care about 64bit values, `-s WASM_BIGINT=1` should be enough with replacing all `size_t` with `uint64_t` in the code. The problem is that `-m64` is not only switching to 64bit int and long, but also to 64 bit pointers which requires wasm64 for 64bit memory.
+
+Conclusion: If I want to use 64 bit values, I should use `-s WASM_BIGINT=1` and replace `size_t` with `uint64_t` in the code. If I want to use 64 bit memory, I should use `-m64` and `-s MEMORY64=1` and build with the `--wasm64` configuration and the corresponding cache targets.
